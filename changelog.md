@@ -16,12 +16,17 @@
 ## Table of Contents
 
 * [Changelog](#changelog)
+  * [Releases v2.1.0](#releases-v210)
   * [Initial Releases v2.0.0](#initial-releases-v200)
 
 ---
 ---
 
 ## Changelog
+
+### Releases v2.1.0
+
+1. Add support to `ESP32S2/C3` boards using `LwIP ENC28J60 Ethernet`
 
 ### Initial Releases v2.0.0
 

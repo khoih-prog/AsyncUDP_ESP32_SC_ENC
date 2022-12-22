@@ -7,11 +7,12 @@
   Built by Khoi Hoang https://github.com/khoih-prog/AsyncUDP_ESP32_SC_ENC
   Licensed under GPLv3 license
 
-  Version: 2.0.0
+  Version: 2.1.0
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
   2.0.0   K Hoang      18/12/2022 Initial coding for ESP32_SC_ENC. Bump up version to v2.0.0 to sync with AsyncUDP v2.0.0
+  2.1.0   K Hoang      21/12/2022 Add support to ESP32_S2/C3 using LwIP ENC28J60 Ethernet
  *****************************************************************************************************************************/
 
 #pragma once
@@ -24,37 +25,37 @@
 #if ( ARDUINO_ESP32S2_DEV || ARDUINO_FEATHERS2 || ARDUINO_ESP32S2_THING_PLUS || ARDUINO_MICROS2 || \
       ARDUINO_METRO_ESP32S2 || ARDUINO_MAGTAG29_ESP32S2 || ARDUINO_FUNHOUSE_ESP32S2 || \
       ARDUINO_ADAFRUIT_FEATHER_ESP32S2_NOPSRAM )
-#if (_ASYNC_UDP_ESP32_SC_ENC_LOGLEVEL_ > 3)
-  #warning Using ESP32_S2. To follow library instructions to install esp32-s2 core and WebServer Patch
-  #warning You have to select HUGE APP or 1.9-2.0 MB APP to be able to run Config Portal. Must use PSRAM
-#endif
+	#if (_ASYNC_UDP_ESP32_SC_ENC_LOGLEVEL_ > 3)
+		#warning Using ESP32_S2. To follow library instructions to install esp32-s2 core and WebServer Patch
+		#warning You have to select HUGE APP or 1.9-2.0 MB APP to be able to run Config Portal. Must use PSRAM
+	#endif
 
-#define USING_ESP32_S2        true
+	#define USING_ESP32_S2        true
 
-#ifndef SHIELD_TYPE
-  #define SHIELD_TYPE         "ESP32_S2_ENC28J60"
-#endif
+	#ifndef SHIELD_TYPE
+		#define SHIELD_TYPE         "ESP32_S2_ENC28J60"
+	#endif
 
-#error ESP32_S2 not supported yet
+////////////////////////////////////////
 
 #elif ( ARDUINO_ESP32C3_DEV )
-#if (_ASYNC_UDP_ESP32_SC_ENC_LOGLEVEL_ > 3)
-  #if ( defined(ESP_ARDUINO_VERSION_MAJOR) && (ESP_ARDUINO_VERSION_MAJOR >= 2) )
-    #warning Using ESP32_C3 using core v2.0.0+. Either LittleFS, SPIFFS or EEPROM OK.
-  #else
-    #warning Using ESP32_C3 using core v1.0.6-. To follow library instructions to install esp32-c3 core. Only SPIFFS and EEPROM OK.
-  #endif
+	#if (_ASYNC_UDP_ESP32_SC_ENC_LOGLEVEL_ > 3)
+		#if ( defined(ESP_ARDUINO_VERSION_MAJOR) && (ESP_ARDUINO_VERSION_MAJOR >= 2) )
+		  #warning Using ESP32_C3 using core v2.0.0+. Either LittleFS, SPIFFS or EEPROM OK.
+		#else
+		  #warning Using ESP32_C3 using core v1.0.6-. To follow library instructions to install esp32-c3 core. Only SPIFFS and EEPROM OK.
+		#endif
 
-  #warning You have to select Flash size 2MB and Minimal APP (1.3MB + 700KB) for some boards
-#endif
+		#warning You have to select Flash size 2MB and Minimal APP (1.3MB + 700KB) for some boards
+	#endif
 
-#define USING_ESP32_C3        true
+	#define USING_ESP32_C3        true
 
-#ifndef SHIELD_TYPE
-  #define SHIELD_TYPE         "ESP32_C3_ENC28J60"
-#endif
+	#ifndef SHIELD_TYPE
+		#define SHIELD_TYPE         "ESP32_C3_ENC28J60"
+	#endif
 
-#error ESP32_C3 not supported yet
+////////////////////////////////////////
 
 #elif ( defined(ARDUINO_ESP32S3_DEV) || defined(ARDUINO_ESP32_S3_BOX) || defined(ARDUINO_TINYS3) || \
         defined(ARDUINO_PROS3) || defined(ARDUINO_FEATHERS3) )
@@ -68,45 +69,48 @@
   #define SHIELD_TYPE         "ESP32_S3_ENC28J60"
 #endif
 
+////////////////////////////////////////
+
 #else
-#error This code is intended to run on the ESP32_S2/3, ESP32_C3 platform! Please check your Tools->Board setting.
+	#error This code is intended to run on the ESP32_S2/3, ESP32_C3 platform! Please check your Tools->Board setting.
 #endif
 
-#define BOARD_NAME      ARDUINO_BOARD
+/////////////////////////////////////////////////
 
+#define BOARD_NAME      ARDUINO_BOARD
 
 /////////////////////////////////////////////////
 
 #if ( ( defined(ESP_ARDUINO_VERSION_MAJOR) && (ESP_ARDUINO_VERSION_MAJOR >= 2) ) && ( ARDUINO_ESP32_GIT_VER != 0x46d5afb1 ) )
 
-#if (_ASYNC_UDP_ESP32_SC_ENC_LOGLEVEL_ > 3)
-  #warning Using code for ESP32 core v2.0.0+ in AsyncUDP_ESP32_SC_ENC.h
-#endif
+	#if (_ASYNC_UDP_ESP32_SC_ENC_LOGLEVEL_ > 3)
+		#warning Using code for ESP32 core v2.0.0+ in AsyncUDP_ESP32_SC_ENC.h
+	#endif
 
-#define ASYNC_UDP_ESP32_SC_ENC_VERSION      "AsyncUDP_ESP32_SC_ENC v2.0.0 for core v2.0.0+"
+	#define ASYNC_UDP_ESP32_SC_ENC_VERSION      "AsyncUDP_ESP32_SC_ENC v2.1.0 for core v2.0.0+"
 
-extern "C"
-{
-#include "lwip/ip_addr.h"
-#include "freertos/queue.h"
-#include "freertos/semphr.h"
-}
+	extern "C"
+	{
+		#include "lwip/ip_addr.h"
+		#include "freertos/queue.h"
+		#include "freertos/semphr.h"
+	}
 
 #else
 
-#if (_ASYNC_UDP_ESP32_SC_ENC_LOGLEVEL_ > 3)
-  #warning Using code for ESP32 core v1.0.6- in AsyncUDP_ESP32_SC_ENC.h
-#endif
+	#if (_ASYNC_UDP_ESP32_SC_ENC_LOGLEVEL_ > 3)
+		#warning Using code for ESP32 core v1.0.6- in AsyncUDP_ESP32_SC_ENC.h
+	#endif
 
-#define ASYNC_UDP_ESP32_SC_ENC_VERSION      "AsyncUDP_ESP32_SC_ENC v2.0.0 for core v1.0.6-"
+	#define ASYNC_UDP_ESP32_SC_ENC_VERSION      "AsyncUDP_ESP32_SC_ENC v2.1.0 for core v1.0.6-"
 
-extern "C"
-{
-#include "lwip/ip_addr.h"
-#include <tcpip_adapter.h>
-#include "freertos/queue.h"
-#include "freertos/semphr.h"
-}
+	extern "C"
+	{
+		#include "lwip/ip_addr.h"
+		#include <tcpip_adapter.h>
+		#include "freertos/queue.h"
+		#include "freertos/semphr.h"
+	}
 
 #endif
 

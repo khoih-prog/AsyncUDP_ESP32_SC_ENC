@@ -7,11 +7,12 @@
   Built by Khoi Hoang https://github.com/khoih-prog/AsyncUDP_ESP32_SC_ENC
   Licensed under GPLv3 license
 
-  Version: 2.0.0
+  Version: 2.1.0
 
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
   2.0.0   K Hoang      18/12/2022 Initial coding for ESP32_SC_ENC. Bump up version to v2.0.0 to sync with AsyncUDP v2.0.0
+  2.1.0   K Hoang      21/12/2022 Add support to ESP32_S2/C3 using LwIP ENC28J60 Ethernet
  *****************************************************************************************************************************/
 
 #pragma once

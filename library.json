@@ -1,6 +1,6 @@
 {
   "name":"AsyncUDP_ESP32_SC_ENC",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description":"Fully Asynchronous UDP Library for ESP32_S2/S3/C3 boards using LwIP ENC28J60 Ethernet. The library is easy to use and includes support for Unicast, Broadcast and Multicast environments",
   "keywords":"communication, data, async, udp, ntp, time, time-server, server, client, multicast, broadcast, webserver, esp32, esp32-s3, esp32-s2, esp32-c3, enc28j60, lwip, udp-server, udp-multicast-server",
   "authors": 
@@ -34,7 +34,7 @@
     {
       "owner": "khoih-prog",
       "name": "WebServer_ESP32_SC_ENC",
-      "version": "^1.0.0",
+      "version": "^1.2.0",
       "platforms": "espressif32"
     }
   ],
